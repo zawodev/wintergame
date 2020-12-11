@@ -9,13 +9,9 @@ public class Slot : MonoBehaviour {
     [HideInInspector]
     public Item item;
 
-    public Sprite[] bckg;
     public Image icon;
     public TextMeshProUGUI value;
 
-    private void Start() {
-        gameObject.GetComponent<Image>().sprite = bckg[Random.Range(0, bckg.Length)];
-    }
     public void AddItem(Item newItem) {
         item = newItem;
 

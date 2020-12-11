@@ -21,9 +21,6 @@ public class InHandItem : MonoBehaviour {
     Transform player;
     Vector2 playerCenter;
 
-    public GameObject bullet;
-    public GameObject gunFire;
-
     [HideInInspector]
     public bool IsTargeting;
     [HideInInspector]
