@@ -26,7 +26,6 @@ public class Inventory : MonoBehaviour {
         else inventory = this;
     }
     public void Start() {
-        handItemSprite = InHandItem.inHandItem.GetComponent<SpriteRenderer>();
         items = Resources.LoadAll<Item>("Items");
         for (int i = 0; i < items.Length; i++) {
             int value = PlayerPrefs.GetInt(items[i].name);
@@ -114,8 +113,6 @@ public class Inventory : MonoBehaviour {
                 if (i < myItems.Count) {
                     myItems[i].isChosen = true;
                     handItemSprite.sprite = myItems[i].inHand;
-
-                    InHandItem.inHandItem.UpdateFirePoint(myItems[i].firePointPos);
                 }
                 else handItemSprite.sprite = null;
             }

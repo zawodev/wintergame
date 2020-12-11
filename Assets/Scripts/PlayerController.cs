@@ -23,16 +23,12 @@ public class PlayerController : MonoBehaviour {
         playerController = this;
     }
     void Update() {
-
-        /*if (crossHair != null) {
-            var dir = crossHair.transform.position - transform.position;
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 45f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-        */
-
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (movement.magnitude > 1) movement.Normalize();
+
+        if (Input.GetAxis("Horizontal") > 0) RotatePlayer(0f);
+        else if (Input.GetAxis("Horizontal") < 0) RotatePlayer(180f);
+        else isMoving = false;
     }
     private void FixedUpdate() {
         Move(maxSpeed * movement, acceleration);
@@ -50,9 +46,8 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce((velocity - vel) * force, ForceMode2D.Force);
         }
     }
-    /*
-    public void GaveImpact(float power) {
-        Vector2 crossHair = CrossHair.crossHair.cursorPos;
-        rb.AddForce(((Vector2)transform.position - crossHair).normalized * power * 1000f, ForceMode2D.Force);
-    }*/
+    public void RotatePlayer(float y) {
+        isMoving = true;
+        transform.rotation = new Quaternion(0f, y, 0f, 0f);
+    }
 }
