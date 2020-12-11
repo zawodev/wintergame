@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour {
     public Color offf;
 
     [Range(0, 8)] public int chose;
-    public Item[] items;
+    Item[] items;
     public List<Item> myItems = new List<Item>();
     public List<Slot> slots = new List<Slot>();
 
@@ -27,20 +27,8 @@ public class Inventory : MonoBehaviour {
     }
     public void Start() {
         items = Resources.LoadAll<Item>("Items");
-        for (int i = 0; i < items.Length; i++) {
-            int value = PlayerPrefs.GetInt(items[i].name);
-            if (value > 0 || items[i].isInfinitiv && PlayerPrefs.GetInt(items[i].name + "inf") == 1) {
-                CreateInWorld(items[i]);
-            }
-        }
         UpdateUI();
         UpdateScroll();
-    }
-    void CreateInWorld(Item item) {
-        myItems.Add(Instantiate(item, slots[myItems.Count].transform));
-        //item.isActive = true;
-
-        if (item.isInfinitiv) PlayerPrefs.SetInt(item.name + "inf", 1);
     }
     public void DropItem(Item item) {
         int amount = PlayerPrefs.GetInt(item.name);
@@ -53,9 +41,6 @@ public class Inventory : MonoBehaviour {
     public void AddMany(Item item, int value) {
         //pick up sound
         item.isActive = PlayerPrefs.GetInt(item.name) + value > 0 ? true : false;
-        if (PlayerPrefs.GetInt(item.name) == 0) {
-            CheckAdd(item);
-        }
         PlayerPrefs.SetInt(item.name, PlayerPrefs.GetInt(item.name) + value);
         UpdateUI();
         UpdateScroll();
@@ -76,23 +61,8 @@ public class Inventory : MonoBehaviour {
 
             PlayerPrefs.SetInt(item.name, amount - value);
 
-            CheckRemove();
             UpdateUI();
             UpdateScroll();
-        }
-    }
-    public void CheckAdd(Item item) {
-        for (int i = 0; i < myItems.Count; i++) {
-            if (myItems[i].name == item.name) {
-                //myItems[i].isActive = true;
-                return;
-            }
-        }
-        CreateInWorld(item);
-    }
-    public void CheckRemove() {
-        for (int i = 0; i < myItems.Count; i++) {
-            if (PlayerPrefs.GetInt(myItems[i].name) == 0 && !myItems[i].isInfinitiv) myItems.RemoveAt(i);
         }
     }
     public void UpdateUI() {
@@ -129,16 +99,12 @@ public class Inventory : MonoBehaviour {
             else chose = 8;
 
             UpdateScroll();
-            //CrossHair.crossHair.Off();
-            //UpperBar.UB.ToggleBar(true);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
             if (chose < 8) chose++;
             else chose = 0;
 
             UpdateScroll();
-            //CrossHair.crossHair.Off();
-            //UpperBar.UB.ToggleBar(true);
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
