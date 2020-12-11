@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour {
+public class Item : MonoBehaviour {
 
     public bool isActive;
     [HideInInspector]
@@ -10,12 +10,6 @@ public abstract class Item : MonoBehaviour {
     public bool canOnShift;
     public enum Type {
         Gun, Souvenir, Sword, Food
-    }
-    private void OnEnable() {
-        isActive = true;
-        if (generateFromCalculations) {
-            firePointPos += new Vector3(Mathf.Clamp((64 - inHand.pivot.x) / 5f, 0f, 100f), 0f, 0f);
-        }
     }
 
     [Header("ITEM")]
@@ -28,7 +22,9 @@ public abstract class Item : MonoBehaviour {
     public bool generateFromCalculations = true;
     public Vector3 firePointPos;
 
-    public abstract void Use();
+    public void Use() {
+
+    }
 
     /*
     //LPM
@@ -41,12 +37,8 @@ public abstract class Item : MonoBehaviour {
     public abstract void PPMEnd();
     public abstract void PPMHold();
     */
-
-    public abstract void ChosenUpdate();
-    public abstract void AlwaysUpdate();
     
     private void Update() {
-        if (isActive && isChosen && (canOnShift || !Input.GetKey(KeyCode.LeftShift))) ChosenUpdate();
-        AlwaysUpdate();
+        
     }
 }
