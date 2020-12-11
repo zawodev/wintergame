@@ -1,3 +1,6 @@
 # wintergame
 
-beka z ciebie typie
+- [ ] make graphics
+- [ ] make game
+- [ ] publish
+- [ ] profit
