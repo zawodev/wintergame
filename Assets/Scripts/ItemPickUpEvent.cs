@@ -22,8 +22,6 @@ public class ItemPickUpEvent : EventHolder {
         child1.GetComponent<SpriteRenderer>().sprite = item.inHand;
     }
     public override void TriggerEvent() {
-        Inventory.inventory.AddMany(item, amount);
-
         if (!infinity) Destroy(gameObject);
     }
     public void ActualizeItem(Item _item, int _amount) {
