@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food : MonoBehaviour
-{
+public class Food : MonoBehaviour {
     public Inventory.Zasob zasob;
     public float tastiness;
     public void Eat() {
