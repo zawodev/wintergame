@@ -67,7 +67,7 @@
     <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\Scripts\EventHolder.cs" />
     <Compile Include="Assets\Scripts\AudioMenager.cs" />
-    <Compile Include="Assets\Food.cs" />
+    <Compile Include="Assets\Scripts\Food.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
