@@ -6,39 +6,13 @@ using TMPro;
 
 public class Slot : MonoBehaviour {
 
-    [HideInInspector]
-    public Item item;
-
     public Image icon;
     public TextMeshProUGUI value;
 
-    public void AddItem(Item newItem) {
-        item = newItem;
-
-        icon.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
-        icon.enabled = true;
-        value.text = PlayerPrefs.GetInt(item.name).ToString();
-        value.enabled = true;
-    }
-    public void ClearSlot() {
-        item = null;
-
-        icon.sprite = null;
-        icon.enabled = false;
-        value.text = null;
-        value.enabled = false;
+    public void Actualize(int amount) {
+        value.text = amount.ToString();
     }
     public void UseItem() {
-        if (item != null) {
-            item.Use();
-        }
+        
     }
-    /*public void OnMouseOver()
-    {
-        if (item != null) ItemInfo.instance.TurnOn(item.icon, item.name, item.description, item.price, item.quality);
-    }
-    public void OnMouseExit()
-    {
-        if (item != null) ItemInfo.instance.TurnOff();
-    }/*/
 }
