@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour {
     public static Inventory inventory;
     private void Awake() {
         inventory = this;
+        ActualizeSlots();
     }
 
     public GameObject child;
@@ -27,6 +28,8 @@ public class Inventory : MonoBehaviour {
         if (newZasob == Zasob.wood.ToString()) zasobyAmount.x += amount;
         else if (newZasob == Zasob.stone.ToString()) zasobyAmount.y += amount;
         else if (newZasob == Zasob.cane.ToString()) zasobyAmount.z += amount;
+
+        ActualizeSlots();
     }
 
     public void Void1() {
